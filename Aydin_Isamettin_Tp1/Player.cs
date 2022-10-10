@@ -3,14 +3,15 @@ namespace Aydin_Isamettin_Tp1
 {
     public class Player
     {
+        //1.1 & 1.3 & 1.6
         private string FirstName { get; set; }
         private string LastName { get; set; }
         private string Alias { get; set; }
-        public string Name { get { return (Alias + " (" + FirstName + " " + LastName + ")"); } }
+        public string Name { get { return (FirstName + " " + LastName); } }
 
 
 
-
+        //1.2 & 1.5
         public Player(string firstName, string lastName, string alias)
         {
             FirstName = Format(firstName);
@@ -18,17 +19,19 @@ namespace Aydin_Isamettin_Tp1
             Alias = alias;
         }
 
+        //1.4
         private static string Format(string str)
         {
-            return str = char.ToUpper(str[0]) + str.Substring(1).ToLower();
+            return char.ToUpper(str[0]) + str.Substring(1).ToLower();
         }
 
-
+        //1.7
         public override string ToString()
         {
-            return (Name);
+            return (Alias + " (" + Name + ")");
         }
 
+        //1.8
         public override bool Equals(object obj)
         {
             Player c = obj as Player;
