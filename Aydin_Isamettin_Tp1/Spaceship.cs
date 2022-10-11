@@ -46,7 +46,6 @@ namespace Aydin_Isamettin_Tp1
         //6.1
         public List<Weapon> WeaponsList;
 
-
         public Spaceship()
         {
             MaxStructure = 100;
@@ -63,9 +62,6 @@ namespace Aydin_Isamettin_Tp1
             {
                 WeaponsList.Add(weapon);
             }
-            //else if () {
-            //    Console.WriteLine("Erreur, vous avez deja 3 armes");
-            //}
         }
 
         public void RemoveWeapon(Weapon oWeapon)

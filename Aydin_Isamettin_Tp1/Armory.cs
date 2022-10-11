@@ -44,7 +44,6 @@ namespace Aydin_Isamettin_Tp1
                 }
             }
         }
-
         public int CountWeapons()
         {
             return Weapons.Count();

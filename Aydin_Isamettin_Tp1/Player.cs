@@ -10,7 +10,6 @@ namespace Aydin_Isamettin_Tp1
         public string Name { get { return (FirstName + " " + LastName); } }
         public Spaceship MonVaisseau { get; set; }
 
-
         //1.2 & 1.5
         public Player(string firstName, string lastName, string alias)
         {

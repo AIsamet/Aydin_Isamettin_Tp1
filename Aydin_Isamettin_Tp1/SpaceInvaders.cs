@@ -11,7 +11,6 @@ namespace Aydin_Isamettin_Tp1
             Init();
         }
 
-
         //2.2 & 2.4 & 2.5 & 2.6
         static void Main()
         {

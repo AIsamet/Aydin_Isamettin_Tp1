@@ -19,6 +19,7 @@ namespace Aydin_Isamettin_Tp1
             MaxDamage = maxDamage;
             weaponType = type;
         }
+
         //4.2
         public enum EWeaponType
         {
