@@ -8,7 +8,8 @@ namespace Aydin_Isamettin_Tp1
         private string LastName { get; set; }
         private string Alias { get; set; }
         public string Name { get { return (FirstName + " " + LastName); } }
-        public Spaceship MonVaisseau { get; set; }
+        //7.1
+        public Spaceship MySpaceship { get; set; }
 
         //1.2 & 1.5
         public Player(string firstName, string lastName, string alias)
@@ -16,7 +17,8 @@ namespace Aydin_Isamettin_Tp1
             FirstName = Format(firstName);
             LastName = Format(lastName);
             Alias = alias;
-            MonVaisseau = new Spaceship();
+            //7.1
+            MySpaceship = new Spaceship();
         }
 
         //1.4

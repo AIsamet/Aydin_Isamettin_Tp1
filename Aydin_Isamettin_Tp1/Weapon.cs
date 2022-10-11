@@ -4,10 +4,10 @@ namespace Aydin_Isamettin_Tp1
     public class Weapon
     {
         //4.3
-        private EWeaponType weaponType;
+        public EWeaponType weaponType;
 
         //4.1
-        public string name { get; set; }
+        public string name { get; private set; }
         public int MinDamage { get; private set; }
         public int MaxDamage { get; private set; }
 

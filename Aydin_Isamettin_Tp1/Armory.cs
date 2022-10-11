@@ -3,8 +3,8 @@ namespace Aydin_Isamettin_Tp1
 {
     public class Armory
     {
-        //5.1
-        public List<Weapon> Weapons { get; set; }
+        //5.1 
+        public List<Weapon> Weapons { get; private set; }
 
         public Armory()
         {
@@ -23,24 +23,27 @@ namespace Aydin_Isamettin_Tp1
         //5.3
         public void ViewArmory()
         {
+            Console.WriteLine("Liste des armes de l'armurerie : ");
             foreach (Weapon weapon in Weapons)
             {
                 Console.WriteLine(weapon.ToString());
             }
+            Console.Write("\n");
         }
 
-        public void AddWeapon(Weapon nouvelleArme)
+        public void AddWeapon(Weapon weapon)
         {
-            Weapons.Add(nouvelleArme);
+            Weapons.Add(weapon);
         }
 
         public void RemoveWeapon(Weapon armeSupprimer)
         {
-            foreach (Weapon w in Weapons)
+            foreach (Weapon weapon in Weapons)
             {
-                if(w.name == armeSupprimer.name)
+                if (weapon.name == armeSupprimer.name)
                 {
                     Weapons.Remove(armeSupprimer);
+                    break;
                 }
             }
         }
@@ -49,6 +52,18 @@ namespace Aydin_Isamettin_Tp1
             return Weapons.Count();
         }
 
+        public Weapon GetWeapon(String name)
+        {
 
+            foreach (Weapon weapon in Weapons)
+            {
+                if (weapon.name == name)
+                {
+                    return weapon;
+                }
+            }
+            throw new ArmoryException("L'arme n'existe pas dans l'armurerie");
+
+        }
     }
 }
