@@ -4,7 +4,8 @@ namespace Aydin_Isamettin_Tp1
     public class SpaceInvaders
     {
         //2.1 & 2.4 & 2.5
-        private List<Player> Players { get; set; }
+        public List<Player> Players { get; set; }
+
         public SpaceInvaders()
         {
             Init();
@@ -15,23 +16,16 @@ namespace Aydin_Isamettin_Tp1
         static void Main()
         {
             SpaceInvaders jeu = new SpaceInvaders();
-            foreach(Player p in jeu.Players)
+
+            foreach (Player p in jeu.Players)
             {
                 Console.WriteLine(p.ToString());
             }
 
-            Spaceship vaisseau = new Spaceship(100, 100);
-
+            Armory monArmurerie = new Armory();
             Weapon arme = new Weapon("Annihilateur lourd", 80, 100, Weapon.EWeaponType.Guided);
 
-            Console.WriteLine(vaisseau.Armurerie.CountWeapons());
-
-            vaisseau.AddWeapon(arme);
-            vaisseau.Armurerie.ViewArmory();
-            Console.WriteLine(vaisseau.Armurerie.CountWeapons());
-            Console.WriteLine(vaisseau.AverageDamages());
-
-
+ 
 
         }
 

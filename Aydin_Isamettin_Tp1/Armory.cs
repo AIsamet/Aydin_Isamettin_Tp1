@@ -36,12 +36,20 @@ namespace Aydin_Isamettin_Tp1
 
         public void RemoveWeapon(Weapon armeSupprimer)
         {
-            Weapons.Remove(armeSupprimer);
+            foreach (Weapon w in Weapons)
+            {
+                if(w.name == armeSupprimer.name)
+                {
+                    Weapons.Remove(armeSupprimer);
+                }
+            }
         }
 
         public int CountWeapons()
         {
             return Weapons.Count();
         }
+
+
     }
 }

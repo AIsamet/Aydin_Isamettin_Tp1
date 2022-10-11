@@ -38,52 +38,65 @@ namespace Aydin_Isamettin_Tp1
                 }
                 else return false;
             }
-            set
+            private set
             {
                 isDestroyed = value;
             }
         }
         //6.1
-        public Armory Armurerie { get; set; }
+        public List<Weapon> WeaponsList;
 
-        public Spaceship(int currentShield, int currentStructure)
+
+        public Spaceship()
         {
             MaxStructure = 100;
             MaxShield = 100;
-            CurrentShield = currentShield;
-            CurrentStructure = currentStructure;
-            this.Armurerie = new Armory();
+            CurrentShield = 100;
+            CurrentStructure = 100;
+            WeaponsList = new List<Weapon>();
         }
 
         //6.2
         public void AddWeapon(Weapon weapon)
         {
-            if (Armurerie.CountWeapons() < 3)
+            if (WeaponsList.Count() < 3)
             {
-                Armurerie.Weapons.Add(weapon);
+                WeaponsList.Add(weapon);
             }
-            else Console.WriteLine("Erreur, vous avez deja 3 armes");
+            //else if () {
+            //    Console.WriteLine("Erreur, vous avez deja 3 armes");
+            //}
         }
 
         public void RemoveWeapon(Weapon oWeapon)
         {
-            Armurerie.Weapons.Remove(oWeapon);
+            WeaponsList.Remove(oWeapon);
+            Console.WriteLine("Arme " + oWeapon.name + " supprimé");
+        }
+
+        public void RemoveWeapon()
+        {
+            WeaponsList.Clear();
         }
 
         //6.3
         public void ViewWeapons()
         {
-            Armurerie.ViewArmory();
+            Console.WriteLine("Liste d'armes du vaisseau : ");
+            foreach (Weapon weapon in WeaponsList)
+            {
+                Console.WriteLine(weapon.ToString());             
+            }
         }
 
         public double AverageDamages()
         {
             double moyenne=0;
-            foreach (Weapon weapon in Armurerie.Weapons)
+            foreach (Weapon weapon in WeaponsList)
             {
-                moyenne += (weapon.MaxDamage-weapon.MinDamage);
+                moyenne += ((weapon.MaxDamage+weapon.MinDamage)/2);
             }
-            return moyenne / Armurerie.CountWeapons();
+            return moyenne / WeaponsList.Count();
         }
     }
 }
