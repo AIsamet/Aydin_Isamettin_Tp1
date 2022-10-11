@@ -24,9 +24,6 @@ namespace Aydin_Isamettin_Tp1
 
             Armory monArmurerie = new Armory();
             Weapon arme = new Weapon("Annihilateur lourd", 80, 100, Weapon.EWeaponType.Guided);
-
- 
-
         }
 
         //2.3 & 2.5
