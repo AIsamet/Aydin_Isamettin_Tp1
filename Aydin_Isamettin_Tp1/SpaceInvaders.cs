@@ -4,7 +4,7 @@ namespace Aydin_Isamettin_Tp1
     public class SpaceInvaders
     {
         //2.3
-        private List<Player> Players { get;  set; }
+        private List<Player> Players { get; set; }
         public Armory GameArmory { get; private set; }
 
         //2.1 & 2.4
@@ -16,6 +16,7 @@ namespace Aydin_Isamettin_Tp1
         //2.2 & 2.4 & 2.5 & 2.6
         static void Main()
         {
+            //8.1
             SpaceInvaders myGame = new SpaceInvaders();
 
             Console.WriteLine("Liste des joueurs :");
@@ -25,14 +26,17 @@ namespace Aydin_Isamettin_Tp1
             }
             Console.Write("\n");
 
-            //8.1
+            //ESSAI DE LA SURCHARGE DE EQUALS
             Console.WriteLine(myGame.Players[0].Equals(myGame.Players[1]) +"\n");
 
-            //INFORMATIONS DU VAISSEAU DU JOUEUR JOHN DOE
+            //ARMES DU VAISSEAU DU JOUEUR JOHN DOE
             myGame.Players[0].MySpaceship.ViewWeapons();
+
+            //CREATION D'UNE NOUVELLE ARME
             Weapon myWeapon = new Weapon("Annihilateur lourd", 80, 100, Weapon.EWeaponType.Guided);
 
-            //ESSAI DAJOUT D'ARME N'ETANT PAS DANS L'ARMURERIE
+            //9.a
+            //ESSAI D'AJOUT D'ARME N'ETANT PAS DANS L'ARMURERIE AVEC LEVEE D'EXCEPTION
             try
             {
                 myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
@@ -41,10 +45,14 @@ namespace Aydin_Isamettin_Tp1
                 Console.WriteLine("Erreur ArmoryException: {0}", e.Message);
             }
 
+            //AJOUT DE L'ARME A L'ARMURERIE
             myGame.GameArmory.AddWeapon(myWeapon);
+
+            //8.2
+            //AFFICHAGE DES ARMES L'ARMURERIE
             myGame.GameArmory.ViewArmory();
 
-            //REESSAI EN L'AJOUTANT DANS L'ARMURERIE
+            //REESSAI D'AJOUTE L'ARME APRES L'AVOIR AJOUTE DANS L'ARMURERIE
             try
             {
                 myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
@@ -53,26 +61,55 @@ namespace Aydin_Isamettin_Tp1
             {
                 Console.WriteLine("Erreur ArmoryException: {0}", e.Message);
             }
+
+            //TEST DES CONDITIONS : AJOUT POSSIBLE QU'UNE SEULE FOIS DANS UN MEME VAISSEAU ET SEULEMENT SI MOINS DE 3 ARMES ACTUELLEMENT 
+            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
+            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Rayon laser"));
+            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Rayon laser"));
+            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Mitrailleuse"));
+            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Lance missile"));
+
+            //AFFICHAGE DES ARMES DU VAISSEAU
             myGame.Players[0].MySpaceship.ViewWeapons();
+
+            //AFFICHAGE DES DEGATS MOYENS DU VAISSEAU
             Console.WriteLine("Degats moyens du vaisseau : " + myGame.Players[0].MySpaceship.AverageDamages() + "\n");
 
             //LE JOUEUR JANE DOE ATTAQUE LE JOUEUR JOHN DOE
             Console.WriteLine(myGame.Players[1].Name + " attaque le vaisseau de " + myGame.Players[0].Name + "\n");
+
             Console.WriteLine("Le vaisseau de " + myGame.Players[0].Name + " subit 100 degats");
             myGame.Players[0].MySpaceship.CurrentShield -= 100;
-            Console.WriteLine("Le vaisseau de " + myGame.Players[0].Name + " n'a plus de shield");
+            Console.WriteLine("Etat du current shield : " + myGame.Players[0].MySpaceship.CurrentShield + "/100");
+            Console.WriteLine("Le vaisseau de " + myGame.Players[0].Name + " n'a plus de shield\n");
+
             Console.WriteLine("Le vaisseau de " + myGame.Players[0].Name + " subit a nouveau 100 degats");
             myGame.Players[0].MySpaceship.CurrentStructure -= 100;
+            Console.WriteLine("Etat du current structure : " + myGame.Players[0].MySpaceship.CurrentStructure + "/100");
 
-            // LE VAISSEAU DE JOHN DOE EST DETRUIT
+            // LE VAISSEAU DE JOHN DOE EST DETRUIT (CHECK AVEC ISDESTROYED())
             if (myGame.Players[0].MySpaceship.IsDestroyed) { Console.WriteLine("Le vaisseau de " + myGame.Players[0].Name + " est detuit\n"); }
+
+            //ON RETIRE L'ARME DU VAISSEAU PARCEQU'IL A ETE MECHANT
             myGame.Players[0].MySpaceship.RemoveWeapon(myWeapon);
+
+            //ESSAI DE SUPRESSION D'ARME QUE LE VAISSEAU NE POSSEDE PAS
+            myGame.Players[0].MySpaceship.RemoveWeapon(myWeapon);
+
+            //REAFFICHAGE DES DEGATS MOYENS DU VAISSEAU ACTUEL
             Console.WriteLine("Degats moyens du vaisseau : " + myGame.Players[0].MySpaceship.AverageDamages() + "\n");
 
-            //8.2
-            myGame.GameArmory.ViewArmory();
+            //AFFICHAGE DES ARMES DU VAISSEAU
+            myGame.Players[0].MySpaceship.ViewWeapons();
 
-            //8.3
+            //SUPRESSION DE TOUTES LES ARMES DU VAISSEAU
+            myGame.Players[0].MySpaceship.ClearWeapons();
+
+            //AFFICHAGE DES ARMES DU VAISSEAU
+            myGame.Players[0].MySpaceship.ViewWeapons();
+
+            //8.3 
+            //AFFICHAGE DE TOUTES LES INFORMATIONS CONCERNANT LE VAISSEAU
             Console.WriteLine("Informations concernant le vaisseau de " + myGame.Players[0].Name);
             myGame.Players[0].MySpaceship.ViewShip();
 

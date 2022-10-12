@@ -9,7 +9,7 @@ namespace Aydin_Isamettin_Tp1
         private string Alias { get; set; }
         public string Name { get { return (FirstName + " " + LastName); } }
         //7.1
-        public Spaceship MySpaceship { get; set; }
+        public Spaceship MySpaceship { get; private set; }
 
         //1.2 & 1.5
         public Player(string firstName, string lastName, string alias)

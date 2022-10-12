@@ -20,6 +20,7 @@ namespace Aydin_Isamettin_Tp1
             }
             set
             {
+                //SI LA CURRENTSTRUCTURE EST SET A ZERO ON MET A JOUR L'ATTRIBUT ISDESTROYED
                 currentStructure = value;
                 if (CurrentStructure == 0)
                 {
@@ -43,8 +44,10 @@ namespace Aydin_Isamettin_Tp1
                 isDestroyed = value;
             }
         }
+
+
         //6.1
-        public List<Weapon> WeaponsList;
+        private List<Weapon> WeaponsList;
 
         public Spaceship()
         {
@@ -56,67 +59,84 @@ namespace Aydin_Isamettin_Tp1
         }
 
         //6.2
+        //ON AJOUTE UNE ARME SEULEMENT SI ELLE EXISTE DANS L'ARMURERIE,
+        //SI ON A ACTUELLEMENT MOINS DE 3 ARMES ET QU'ON A PAS DEJA L'ARME SOUAHITEE
         public void AddWeapon(Weapon weapon)
         {
             try
             {
-                if (WeaponsList.Count() < 3)
+                if (WeaponsList.Count() < 3 && !CheckWeapon(weapon))
                 {
                     WeaponsList.Add(weapon);
                     Console.WriteLine(weapon.name + " ajouté au vaisseau \n");
                 }
-                else { Console.WriteLine("Vous avez atteint le nombre d'armes maximum\n"); }
+                else if(WeaponsList.Count() >= 3) { Console.WriteLine("Vous avez atteint le nombre d'armes maximum\n"); }
+                else { Console.WriteLine("Vous ne pouvez pas ajouter la meme arme une seconde fois ("+ weapon.name +")\n"); }
             }
             catch (ArmoryException e)
             {
-                Console.WriteLine(e);
-                return;
+                Console.WriteLine(e.Message);
             }
         }
 
-    public void RemoveWeapon(Weapon oWeapon)
-    {
-        WeaponsList.Remove(oWeapon);
-        Console.WriteLine("Arme " + oWeapon.name + " supprimé\n");
-    }
-
-    public void ClearWeapons()
-    {
-        WeaponsList.Clear();
-        Console.WriteLine("La liste des armes a été vidée\n");
-    }
-
-    //6.3
-    public void ViewWeapons()
-    {
-        Console.WriteLine("Liste d'armes du vaisseau : ");
-        foreach (Weapon weapon in WeaponsList)
+        //ON REMOVE UNE ARME SEULEMENT SI ELLE EXISTE DANS NOTRE VAISSEAU
+        public void RemoveWeapon(Weapon oWeapon)
         {
-            Console.WriteLine(weapon.ToString());
+            if (CheckWeapon(oWeapon))
+            {
+                WeaponsList.Remove(oWeapon);
+                Console.WriteLine("Arme " + oWeapon.name + " supprimé\n");
+            }
+            else { Console.WriteLine("Vous ne possedez pas l'arme " + oWeapon.name + "\n"); }  
         }
 
-        if (WeaponsList.Count == 0) { Console.WriteLine("Vide\n"); }
-        else { Console.WriteLine(""); };
-    }
-
-    public double AverageDamages()
-    {
-        double moyenne = 0;
-        foreach (Weapon weapon in WeaponsList)
+        public void ClearWeapons()
         {
-            moyenne += ((weapon.MaxDamage + weapon.MinDamage) / 2);
+            WeaponsList.Clear();
+            Console.WriteLine("La liste des armes du vaisseau a été vidée\n");
         }
-        if ((moyenne / WeaponsList.Count()) > 0) { return moyenne; }
-        return 0;
-    }
 
-    public void ViewShip()
-    {
-        Console.WriteLine("Point de structure maximum : " + MaxStructure);
-        Console.WriteLine("Point de bouclier maximum : " + MaxShield);
-        Console.WriteLine("Point de structure courrant : " + CurrentStructure);
-        Console.WriteLine("Point de bouclier courrant : " + CurrentShield);
-        ViewWeapons();
+        //6.3
+        public void ViewWeapons()
+        {
+            Console.WriteLine("Liste d'armes du vaisseau : ");
+            foreach (Weapon weapon in WeaponsList)
+            {
+                Console.WriteLine(weapon.ToString());
+            }
+
+            if (WeaponsList.Count == 0) { Console.WriteLine("Vide\n"); }
+            else { Console.WriteLine(""); };
+        }
+
+        public double AverageDamages()
+        {
+            double moyenne = 0;
+            foreach (Weapon weapon in WeaponsList)
+            {
+                moyenne += ((weapon.MaxDamage + weapon.MinDamage) / 2);
+            }
+            if ((moyenne / WeaponsList.Count()) > 0) { return moyenne; }
+            return 0;
+        }
+
+        //VERIFIE SI UNE ARME EST DEJA AJOUTE AU SPACESHIP
+        public bool CheckWeapon(Weapon weapon)
+        {
+            foreach (Weapon w in WeaponsList)
+            {
+                if(w.name == weapon.name) { return true; }
+            }
+            return false;
+        }
+
+        public void ViewShip()
+        {
+            Console.WriteLine("Point de structure maximum : " + MaxStructure);
+            Console.WriteLine("Point de bouclier maximum : " + MaxShield);
+            Console.WriteLine("Point de structure courrant : " + CurrentStructure);
+            Console.WriteLine("Point de bouclier courrant : " + CurrentShield);
+            ViewWeapons();
+        }
     }
-}
 }
