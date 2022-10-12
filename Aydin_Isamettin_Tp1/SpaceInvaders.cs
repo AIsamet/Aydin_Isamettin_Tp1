@@ -33,7 +33,7 @@ namespace Aydin_Isamettin_Tp1
             Weapon myWeapon = new Weapon("Annihilateur lourd", 80, 100, Weapon.EWeaponType.Guided);
             Armory test = new Armory();
             //ESSAI DAJOUT D'ARME N'ETANT PAS DANS L'ARMURERIE
-            //myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
+            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
             myGame.GameArmory.AddWeapon(myWeapon);
             myGame.GameArmory.ViewArmory();
 
