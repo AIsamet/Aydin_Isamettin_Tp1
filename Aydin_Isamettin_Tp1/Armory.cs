@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Xml.Linq;
-
 namespace Aydin_Isamettin_Tp1
 {
     public class Armory
