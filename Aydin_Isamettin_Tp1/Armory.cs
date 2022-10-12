@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Xml.Linq;
+
 namespace Aydin_Isamettin_Tp1
 {
     public class Armory
@@ -54,7 +56,6 @@ namespace Aydin_Isamettin_Tp1
 
         public Weapon GetWeapon(String name)
         {
-
             foreach (Weapon weapon in Weapons)
             {
                 if (weapon.name == name)
@@ -62,8 +63,7 @@ namespace Aydin_Isamettin_Tp1
                     return weapon;
                 }
             }
-            throw new ArmoryException("L'arme n'existe pas dans l'armurerie");
-
+            throw new ArmoryException("L'arme n'existe pas dans l'armurerie\n");
         }
     }
 }

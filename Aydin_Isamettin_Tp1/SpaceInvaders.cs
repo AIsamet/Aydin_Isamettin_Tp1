@@ -31,14 +31,28 @@ namespace Aydin_Isamettin_Tp1
             //INFORMATIONS DU VAISSEAU DU JOUEUR JOHN DOE
             myGame.Players[0].MySpaceship.ViewWeapons();
             Weapon myWeapon = new Weapon("Annihilateur lourd", 80, 100, Weapon.EWeaponType.Guided);
-            Armory test = new Armory();
+
             //ESSAI DAJOUT D'ARME N'ETANT PAS DANS L'ARMURERIE
-            myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
+            try
+            {
+                myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
+            }catch(ArmoryException e)
+            {
+                Console.WriteLine("Erreur ArmoryException: {0}", e.Message);
+            }
+
             myGame.GameArmory.AddWeapon(myWeapon);
             myGame.GameArmory.ViewArmory();
 
             //REESSAI EN L'AJOUTANT DANS L'ARMURERIE
-            myGame.Players[0].MySpaceship.AddWeapon(myWeapon);
+            try
+            {
+                myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
+            }
+            catch (ArmoryException e)
+            {
+                Console.WriteLine("Erreur ArmoryException: {0}", e.Message);
+            }
             myGame.Players[0].MySpaceship.ViewWeapons();
             Console.WriteLine("Degats moyens du vaisseau : " + myGame.Players[0].MySpaceship.AverageDamages() + "\n");
 
