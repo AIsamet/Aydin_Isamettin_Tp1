@@ -63,21 +63,15 @@ namespace Aydin_Isamettin_Tp1
         //SI ON A ACTUELLEMENT MOINS DE 3 ARMES ET QU'ON A PAS DEJA L'ARME SOUAHITEE
         public void AddWeapon(Weapon weapon)
         {
-            try
+            if (WeaponsList.Count() < 3 && !CheckWeapon(weapon))
             {
-                if (WeaponsList.Count() < 3 && !CheckWeapon(weapon))
-                {
-                    WeaponsList.Add(weapon);
-                    Console.WriteLine(weapon.name + " ajouté au vaisseau \n");
-                }
-                else if(WeaponsList.Count() >= 3) { Console.WriteLine("Vous avez atteint le nombre d'armes maximum\n"); }
-                else { Console.WriteLine("Vous ne pouvez pas ajouter la meme arme une seconde fois ("+ weapon.name +")\n"); }
+                WeaponsList.Add(weapon);
+                Console.WriteLine(weapon.name + " ajouté au vaisseau \n");
             }
-            catch (ArmoryException e)
-            {
-                Console.WriteLine(e.Message);
-            }
+            else if (WeaponsList.Count() >= 3) { Console.WriteLine("Vous avez atteint le nombre d'armes maximum\n"); }
+            else { Console.WriteLine("Vous ne pouvez pas ajouter la meme arme une seconde fois (" + weapon.name + ")\n"); }
         }
+
 
         //ON REMOVE UNE ARME SEULEMENT SI ELLE EXISTE DANS NOTRE VAISSEAU
         public void RemoveWeapon(Weapon oWeapon)
@@ -87,7 +81,7 @@ namespace Aydin_Isamettin_Tp1
                 WeaponsList.Remove(oWeapon);
                 Console.WriteLine("Arme " + oWeapon.name + " supprimé\n");
             }
-            else { Console.WriteLine("Vous ne possedez pas l'arme " + oWeapon.name + "\n"); }  
+            else { Console.WriteLine("Vous ne possedez pas l'arme " + oWeapon.name + "\n"); }
         }
 
         public void ClearWeapons()
@@ -125,7 +119,7 @@ namespace Aydin_Isamettin_Tp1
         {
             foreach (Weapon w in WeaponsList)
             {
-                if(w.name == weapon.name) { return true; }
+                if (w.name == weapon.name) { return true; }
             }
             return false;
         }

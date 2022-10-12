@@ -27,7 +27,7 @@ namespace Aydin_Isamettin_Tp1
             Console.Write("\n");
 
             //ESSAI DE LA SURCHARGE DE EQUALS
-            Console.WriteLine(myGame.Players[0].Equals(myGame.Players[1]) +"\n");
+            Console.WriteLine(myGame.Players[0].Equals(myGame.Players[1]) + "\n");
 
             //ARMES DU VAISSEAU DU JOUEUR JOHN DOE
             myGame.Players[0].MySpaceship.ViewWeapons();
@@ -40,7 +40,8 @@ namespace Aydin_Isamettin_Tp1
             try
             {
                 myGame.Players[0].MySpaceship.AddWeapon(myGame.GameArmory.GetWeapon("Annihilateur lourd"));
-            }catch(ArmoryException e)
+            }
+            catch (ArmoryException e)
             {
                 Console.WriteLine("Erreur ArmoryException: {0}", e.Message);
             }
@@ -96,7 +97,7 @@ namespace Aydin_Isamettin_Tp1
             //ESSAI DE SUPRESSION D'ARME QUE LE VAISSEAU NE POSSEDE PAS
             myGame.Players[0].MySpaceship.RemoveWeapon(myWeapon);
 
-            //REAFFICHAGE DES DEGATS MOYENS DU VAISSEAU ACTUEL
+            //REAFFICHAGE DES DEGATS MOYENS ACTUEL DU VAISSEAU
             Console.WriteLine("Degats moyens du vaisseau : " + myGame.Players[0].MySpaceship.AverageDamages() + "\n");
 
             //AFFICHAGE DES ARMES DU VAISSEAU
